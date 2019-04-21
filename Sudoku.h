@@ -11,7 +11,7 @@ class Sudoku
 private:
 	 
 	int a[9][9];
-	int num_var;
+	queue <pair<int, int>> variables;
 	
 public:
 
@@ -27,7 +27,7 @@ public:
 
 	bool isComplete();
 
-	void findVariables(int *row, int *col);
+	void findVariables();
 
 	void printBoard(int board[9][9]);
 };

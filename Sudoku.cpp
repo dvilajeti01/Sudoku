@@ -6,6 +6,7 @@ using namespace std;
 Sudoku::Sudoku(int initial[9][9])
 {
 	copyArray(this->a, initial);
+	findVariables();
 }
 
 void Sudoku::solve()
@@ -18,7 +19,11 @@ void Sudoku::solve()
 		cout << endl;
 	}
 	else
-		cout << "SOLUTION NOT FOUND";
+	{
+		cout << "SOLUTION NOT FOUND" <<endl;
+		printBoard(a);
+		cout << endl;
+	}
 }
 
 bool Sudoku::Backtracking(int board[9][9])
@@ -30,13 +35,15 @@ bool Sudoku::Backtracking(int board[9][9])
 	else
 	{
 		//select next unassinged cell
-		findVariables(&row, &col);
-
+		row = variables.front().first;
+		col = variables.front().second;
+		
 		for (int i = 1; i <= 9; i++) //for each value of v of D
 		{
 			if (alldiff(i,row,col))//check if v is satisfies constraints
 			{
 				board[row][col] = i; //assign v to unassigned cell
+				variables.pop();
 				if (Backtracking(board)) //recursive func call
 					return true;
 			}
@@ -90,30 +97,25 @@ bool Sudoku::alldiff(int value, int row, int col)
 
 bool Sudoku::isComplete()
 {
-	for (int i = 0; i < 9; i++)
-	{
-		for (int j = 0; j < 9; j++)
-		{
-			if (a[i][j] == 0)
-			{
-				return false;
-			}
-		}
-	}
-	return true;
+	if (variables.empty())
+		return true;
+	else
+		return false;
 }
 
-void Sudoku::findVariables(int *row, int * col)
+void Sudoku::findVariables()
 {
+	pair <int, int> coordinates;
+
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 9; j++)
 		{
 			if (a[i][j] == 0)
 			{
-				*row = i;
-				*col = j;
-				return;
+				coordinates.first = i; //row
+				coordinates.second = j; //col
+				variables.push(coordinates); //store pair into stack
 			}
 		}
 	}
