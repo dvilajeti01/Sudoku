@@ -2,7 +2,7 @@
 //#define 9 9
 
 #include <iostream>
-#include <queue>
+#include <stack>
 #include <utility>
 using namespace std;
 
@@ -11,7 +11,7 @@ class Sudoku
 private:
 	 
 	int a[9][9];
-	queue <pair<int, int>> variables;
+	stack <pair<int, int>> variables;
 	
 public:
 

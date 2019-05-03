@@ -29,14 +29,17 @@ void Sudoku::solve()
 bool Sudoku::Backtracking(int board[9][9])
 {
 	int row, col;
+	pair < int, int> coordinates;
 
 	if (isComplete())
 		return true;
 	else
 	{
 		//select next unassinged cell
-		row = variables.front().first;
-		col = variables.front().second;
+		row = variables.top().first;
+		col = variables.top().second;
+		coordinates.first = row;
+		coordinates.second = col;
 		
 		for (int i = 1; i <= 9; i++) //for each value of v of D
 		{
@@ -46,6 +49,10 @@ bool Sudoku::Backtracking(int board[9][9])
 				variables.pop();
 				if (Backtracking(board)) //recursive func call
 					return true;
+				else
+				{
+					variables.push(coordinates);
+				}
 			}
 		}
 	}
@@ -107,9 +114,9 @@ void Sudoku::findVariables()
 {
 	pair <int, int> coordinates;
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 8; i >= 0; i--)
 	{
-		for (int j = 0; j < 9; j++)
+		for (int j = 8; j >= 0; j--)
 		{
 			if (a[i][j] == 0)
 			{
@@ -127,7 +134,7 @@ void Sudoku::printBoard(int board[9][9])
 	{
 		for (int j = 0; j < 9; j++)
 		{
-			cout << a[j][i] << " ";
+			cout << a[i][j] << " ";
 		}
 
 		cout << endl;
