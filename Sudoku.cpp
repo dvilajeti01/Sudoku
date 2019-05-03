@@ -10,9 +10,7 @@ Sudoku::Sudoku(int initial[9][9])
 
 void Sudoku::solve()
 {
-	printBoard(a);
-	cout << endl;
-	if (Backtracking(a))
+    if (Backtracking(a))
 	{
 		printBoard(a);
 		cout << endl;
@@ -39,6 +37,7 @@ bool Sudoku::Backtracking(int board[9][9])
 				board[row][col] = i; //assign v to unassigned cell
 				if (Backtracking(board)) //recursive func call
 					return true;
+                board[row][col] = 0;
 			}
 		}
 	}
