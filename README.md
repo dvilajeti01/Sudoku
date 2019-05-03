@@ -65,3 +65,21 @@ Puzzle 2
 Program ended with exit code: 0
 
 ```
+# Explanation of the ``` Sudoku ``` class and its respective member functions:
+
+The most important member function in the ``` Sudoku ``` class are:
+
+``` c++
+
+bool Backtracking(int board[9][9]);
+
+bool alldiff(int value, int row, int col);
+
+```
+``` Backtarcking ``` function accepts an incomplete board as a parameter. Here the Backtracking algorith itslef is implemented
+using recursion.
+
+The ``` alldiff ``` function ensures that a give cell assignment meets all three criteria. 
+1. It is a unique value in its row.
+2. It is a unique value in its column.
+3. It is a unique values in its own box.
