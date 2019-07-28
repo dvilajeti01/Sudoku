@@ -82,4 +82,4 @@ using recursion.
 The ``` alldiff ``` function ensures that a give cell assignment meets all three criteria. 
 1. It is a unique value in its row.
 2. It is a unique value in its column.
-3. It is a unique values in its own box.
+3. It is a unique value in its own box.
